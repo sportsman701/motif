@@ -1,0 +1,12 @@
+{
+  "name": "motif",
+  "displayName": "motif",
+  "expo": {
+    "name": "motif",
+    "slug": "motif",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
