@@ -1,12 +1,15 @@
 import React, { useState, useRef } from 'react';
-import { StyleSheet, View, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import Image from 'react-native-fit-image'
+import { useHistory } from 'react-router-native';
 import Slider from 'react-native-app-intro-slider';
 import Text from 'components/Text'
-import CommonStyles, { Size, CustomStyles, Colors } from 'styles';
+import Button from 'components/Button'
+import CommonStyles, { Size, CustomStyles } from 'styles';
 import ForwardIcon from 'icons/forward'
-import img1 from 'images/onboarding1.png'
-import img2 from 'images/onboarding2.png'
-import img3 from 'images/onboarding3.png'
+import img1 from 'images/onboarding/onboarding1.png'
+import img2 from 'images/onboarding/onboarding2.png'
+import img3 from 'images/onboarding/onboarding3.png'
 
 const slides = [
   {
@@ -26,9 +29,10 @@ const slides = [
   }
 ]
 
-export default function () {
+export default () => {
   const [slide, setSlide] = useState(0)
   const slider = useRef(null)
+  const history = useHistory()
 
   const handlePrevPress = () => {
     if (slider.current && slide > 0) {
@@ -39,7 +43,7 @@ export default function () {
   const handleNextPress = () => {
     if (slider.current) {
       if (slide === 2) {
-        // done
+        history.push('/explore-challenges')
       } else {
         slider.current.goToSlide(slide + 1, true)
       }
@@ -48,11 +52,15 @@ export default function () {
 
   const renderItem = ({ item: { image, title, desc }, dimensions }) => (
     <View style={{ height: dimensions.height }}>
-      <Image source={image} style={styles.image}/>
-      <Text style={styles.title}>
+      <Image
+        source={image}
+        resizeMode='contain'
+        style={styles.image}
+      />
+      <Text style={styles.title} center>
         {title}
       </Text>
-      <Text style={styles.desc}>
+      <Text style={styles.desc} center>
         {desc}
       </Text>
     </View>
@@ -67,31 +75,23 @@ export default function () {
         showDoneButton={false}
         dotClickEnabled={false}
         onSlideChange={setSlide}
-        ref={slider}
         keyExtractor={(item, index) => index.toString()}
+        ref={slider}
       />
       <View style={styles.buttonBar}>
-        <TouchableOpacity
-          style={styles.backButton}
-          activeOpacity={0.7}
-          onPress={handlePrevPress}
-        >
-          <View style={styles.buttonView}>
-            <ForwardIcon style={styles.prevButtonIcon} />
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity
+        <Button style={styles.backButton} onPress={handlePrevPress}>
+          <ForwardIcon style={styles.prevButtonIcon} />
+        </Button>
+        <Button
           style={styles.nextButton}
-          activeOpacity={0.7}
           onPress={handleNextPress}
+          block
         >
-          <View style={styles.buttonView}>
-            <Text style={[CommonStyles.white]}>
-              {slide === 2 ? 'Done' : 'Next'}
-            </Text>
-            <ForwardIcon style={styles.nextButtonIcon} />
-          </View>
-        </TouchableOpacity>
+          <Text style={CommonStyles.white}>
+            {slide === 2 ? 'Done' : 'Next'}
+          </Text>
+          <ForwardIcon style={styles.nextButtonIcon} />
+        </Button>
       </View>
     </View>
   );
@@ -100,7 +100,10 @@ export default function () {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: Size(),
+    paddingLeft: Size(),
+    paddingRight: Size(),
+    paddingTop: Size(2),
+    paddingBottom: Size(),
     ...CustomStyles.fullScreen,
     ...CustomStyles.bgSecondary
   },
@@ -120,42 +123,29 @@ const styles = StyleSheet.create({
   },
   image: {
     flex: 1,
-    resizeMode: 'contain',
     margin: Size(2)
   },
   title: {
     marginBottom: Size(0.5),
     color: 'white',
-    textAlign: 'center',
     ...CustomStyles.textSubSection
   },
   desc: {
     color: 'white',
     marginBottom: 80,
-    textAlign: 'center'
   },
   buttonBar: {
     flexDirection: 'row'
   },
   backButton: {
-    alignItems: 'center',
-    padding: Size(0.5),
-    borderRadius: Size(0.5),
-    backgroundColor: '#fff5',
+    padding: Size(0.8),
     marginRight: Size(0.5),
+    borderRadius: Size(0.5),
+    backgroundColor: '#fff5'
   },
   nextButton: {
-    alignItems: 'center',
-    padding: Size(0.5),
-    backgroundColor: Colors.primary,
+    padding: Size(0.8),
     borderRadius: Size(0.5),
-    flex: 1,
-  },
-  buttonView: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginTop: 'auto',
-    marginBottom: 'auto'
   },
   prevButtonIcon: {
     transform: [{ rotate: '180deg' }]

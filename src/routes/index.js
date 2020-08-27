@@ -1,15 +1,17 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, SafeAreaView } from 'react-native';
 import { NativeRouter, Route, Redirect } from 'react-router-native';
-import Onboarding from './onboarding'
+import { Onboarding, ExploreChallenges } from './onboarding'
 import { Size } from 'styles'
 
 export default () => (
   <NativeRouter>
-    <View style={styles.container}>
-      <Redirect to='/onboarding'/>
+    <SafeAreaView style={styles.container}>
+      {/* <Redirect to='/explore-challenges' /> */}
+      <Redirect to='/onboarding' />
       <Route exact path='/onboarding' component={Onboarding} />
-    </View>
+      <Route exact path='/explore-challenges' component={ExploreChallenges} />
+    </SafeAreaView>
   </NativeRouter>
 )
 
@@ -17,6 +19,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingLeft: Size(),
-    paddingRight: Size()
+    paddingRight: Size(),
+    paddingTop: Size(2),
+    paddingBottom: Size()
   }
 });

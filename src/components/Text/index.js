@@ -1,20 +1,32 @@
 import React from 'react'
-import { Text } from 'react-native'
+import { Text, StyleSheet } from 'react-native'
 import CommonStyles from 'styles';
 
-export default ({ format, style, children }) => {
+export default ({ format, center, style, children }) => {
   const getStyle = () => {
+    const style = []
+    
     switch (format) {
       case 'title':
-        return CommonStyles.textTitle
+        style.push(CommonStyles.textTitle)
+        break
       case 'section':
-        return CommonStyles.textSection
+        style.push(CommonStyles.textSection)
+        break
       case 'subsection':
-        return CommonStyles.textSubSection
+        style.push(CommonStyles.textSubSection)
+        break
       case 'normal':
       default:
-        return CommonStyles.textNormal
+        style.push(CommonStyles.textNormal)
+        break
     }
+
+    if (center) {
+      style.push([styles.center])
+    }
+
+    return style
   }
 
   return (
@@ -23,3 +35,10 @@ export default ({ format, style, children }) => {
     </Text>
   )
 }
+
+const styles = StyleSheet.create({
+  center: {
+    textAlign: 'center'
+  }
+})
+

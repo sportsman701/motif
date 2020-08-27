@@ -12,6 +12,8 @@ export const CustomStyles = {
   fullScreen: {
     marginRight: -Size(),
     marginLeft: -Size(),
+    marginTop: -Size(2),
+    marginBottom: -Size()
   },
 
   /* Font size */
@@ -35,8 +37,8 @@ export const CustomStyles = {
   primary: {
     color: Colors.primary
   },
-  seconary: {
-    color: Colors.seconray
+  secondary: {
+    color: Colors.secondary
   },
   white: {
     color: 'white'
