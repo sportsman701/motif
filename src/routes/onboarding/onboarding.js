@@ -1,11 +1,10 @@
 import React, { useState, useRef } from 'react';
 import { StyleSheet, View } from 'react-native';
 import Image from 'react-native-fit-image'
-import { useHistory } from 'react-router-native';
 import Slider from 'react-native-app-intro-slider';
 import Text from 'components/Text'
 import Button from 'components/Button'
-import CommonStyles, { Size, CustomStyles } from 'styles';
+import { Size, white, fullScreen, bgSecondary, textSubSection } from 'styles';
 import ForwardIcon from 'icons/forward'
 import img1 from 'images/onboarding/onboarding1.png'
 import img2 from 'images/onboarding/onboarding2.png'
@@ -32,23 +31,12 @@ const slides = [
 export default () => {
   const [slide, setSlide] = useState(0)
   const slider = useRef(null)
-  const history = useHistory()
 
-  const handlePrevPress = () => {
-    if (slider.current && slide > 0) {
-      slider.current.goToSlide(slide - 1, true)
-    }
-  }
+  const handlePrevPress = () =>
+    slider.current && slider.current.goToSlide(slide - 1, true)
   
-  const handleNextPress = () => {
-    if (slider.current) {
-      if (slide === 2) {
-        history.push('/explore-challenges')
-      } else {
-        slider.current.goToSlide(slide + 1, true)
-      }
-    }
-  }
+  const handleNextPress = () =>
+    slider.current && slider.current.goToSlide(slide + 1, true)
 
   const renderItem = ({ item: { image, title, desc }, dimensions }) => (
     <View style={{ height: dimensions.height }}>
@@ -57,10 +45,10 @@ export default () => {
         resizeMode='contain'
         style={styles.image}
       />
-      <Text style={styles.title} center>
+      <Text style={styles.title} align='center'>
         {title}
       </Text>
-      <Text style={styles.desc} center>
+      <Text style={styles.desc} align='center'>
         {desc}
       </Text>
     </View>
@@ -79,15 +67,20 @@ export default () => {
         ref={slider}
       />
       <View style={styles.buttonBar}>
-        <Button style={styles.backButton} onPress={handlePrevPress}>
+        <Button
+          style={styles.backButton}
+          onPress={handlePrevPress}
+          disabled={slide === 0}
+        >
           <ForwardIcon style={styles.prevButtonIcon} />
         </Button>
         <Button
           style={styles.nextButton}
-          onPress={handleNextPress}
+          onPress={(slide < 2 && handleNextPress) || undefined}
+          link={slide === 2 && '/explore-challenges'}
           block
         >
-          <Text style={CommonStyles.white}>
+          <Text style={white}>
             {slide === 2 ? 'Done' : 'Next'}
           </Text>
           <ForwardIcon style={styles.nextButtonIcon} />
@@ -104,8 +97,8 @@ const styles = StyleSheet.create({
     paddingRight: Size(),
     paddingTop: Size(2),
     paddingBottom: Size(),
-    ...CustomStyles.fullScreen,
-    ...CustomStyles.bgSecondary
+    ...fullScreen,
+    ...bgSecondary
   },
   swiperDot: {
     backgroundColor:'#fff5',
@@ -128,7 +121,7 @@ const styles = StyleSheet.create({
   title: {
     marginBottom: Size(0.5),
     color: 'white',
-    ...CustomStyles.textSubSection
+    ...textSubSection
   },
   desc: {
     color: 'white',

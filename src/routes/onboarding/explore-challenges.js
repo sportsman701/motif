@@ -2,9 +2,10 @@ import React, { useState } from 'react'
 import { Platform, StyleSheet, View, ScrollView } from 'react-native';
 import Text from 'components/Text'
 import Button from 'components/Button'
+import Link from 'components/Link'
 import Image from 'react-native-fit-image';
 import xor from 'lodash/xor'
-import CommonStyles, { CustomStyles, Size, Colors } from 'styles';
+import { flexOne, secondary, Size, Colors } from 'styles';
 
 import img1 from 'images/explore-challenges/gsp.jpg'
 import img2 from 'images/explore-challenges/aaron-paul.jpg'
@@ -43,10 +44,17 @@ export default () => {
   const handleSelectPress = () => {}
 
   return (
-    <View style={CustomStyles.flexOne}>
-      <Text format='section' center>
-        Explore Challenges
-      </Text>
+    <View style={flexOne}>
+      <View>
+        <Text format='section' align='center'>
+          Explore Challenges
+        </Text>
+        <Link to='/onboarding' style={styles.skip}>
+          <Text style={secondary} strong>
+            Skip
+          </Text>
+        </Link>
+      </View>
       
       <ScrollView style={styles.challengeScroll}>
         <View style={styles.challengeView}>
@@ -67,10 +75,10 @@ export default () => {
                       style={styles.image}
                     />
                   </View>
-                  <Text format='subsection' center>
+                  <Text format='subsection'>
                     {data[index][0]}
                   </Text>
-                  <Text style={CommonStyles.secondary} center>
+                  <Text style={secondary}>
                     {data[index][1]}
                   </Text>
                 </Button>
@@ -90,6 +98,10 @@ export default () => {
 }
 
 const styles = StyleSheet.create({
+  skip:{
+    position: 'absolute',
+    right: 0
+  },
   challengeScroll: {
     marginTop: Size(),
     marginBottom: Size()

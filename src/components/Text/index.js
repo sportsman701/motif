@@ -1,44 +1,44 @@
 import React from 'react'
-import { Text, StyleSheet } from 'react-native'
-import CommonStyles from 'styles';
+import { Text } from 'react-native'
+import { textTitle, textSection, textSubSection, textNormal } from 'styles';
 
-export default ({ format, center, style, children }) => {
+export default React.forwardRef(({ format, align, strong, style, children }, ref) => {
   const getStyle = () => {
     const style = []
     
     switch (format) {
       case 'title':
-        style.push(CommonStyles.textTitle)
+        style.push(textTitle)
         break
       case 'section':
-        style.push(CommonStyles.textSection)
+        style.push(textSection)
         break
       case 'subsection':
-        style.push(CommonStyles.textSubSection)
+        style.push(textSubSection)
         break
       case 'normal':
       default:
-        style.push(CommonStyles.textNormal)
+        style.push(textNormal)
         break
     }
 
-    if (center) {
-      style.push([styles.center])
+    switch (align) {
+      case 'left':
+      case 'right':
+      case 'center':
+        style.push({ textAlign: align})
+    }
+
+    if (strong) {
+      style.push({ fontWeight: 'bold' })
     }
 
     return style
   }
 
   return (
-    <Text style={[getStyle(), style]}>
+    <Text ref={ref} style={[getStyle(), style]}>
       {children}
     </Text>
   )
-}
-
-const styles = StyleSheet.create({
-  center: {
-    textAlign: 'center'
-  }
 })
-

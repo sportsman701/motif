@@ -7,8 +7,8 @@ import { Size } from 'styles'
 export default () => (
   <NativeRouter>
     <SafeAreaView style={styles.container}>
-      {/* <Redirect to='/explore-challenges' /> */}
-      <Redirect to='/onboarding' />
+      <Redirect to='/explore-challenges' />
+      {/* <Redirect to='/onboarding' /> */}
       <Route exact path='/onboarding' component={Onboarding} />
       <Route exact path='/explore-challenges' component={ExploreChallenges} />
     </SafeAreaView>

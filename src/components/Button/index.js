@@ -1,21 +1,22 @@
 import React from 'react'
-import { View, TouchableOpacity, StyleSheet } from 'react-native'
+import { TouchableOpacity, StyleSheet } from 'react-native'
+import { Link } from 'react-router-native'
 import Text from '../Text'
-import { Colors, Size, CustomStyles } from 'styles'
+import { Size, bgPrimary } from 'styles'
 
 const variants = {
-  primary: CustomStyles.bgPrimary,
+  primary: bgPrimary,
   // danger: CustomStyles.
   nobg: { backgroundColor: '#ffff' }
 }
 
-export default ({ style, title, block, variant, children, ...rest }) => (
+const Button = ({ style, title, block, variant, children, ...rest }) => (
   <TouchableOpacity
     style={[
       styles.container,
       styles.buttonView,
       block && styles.block,
-      variants[variant] || CustomStyles.bgPrimary,
+      variants[variant] || bgPrimary,
       style
     ]}
     activeOpacity={0.7}
@@ -28,6 +29,13 @@ export default ({ style, title, block, variant, children, ...rest }) => (
     )}
   </TouchableOpacity>
 )
+
+export default ({ link, ...rest }) =>
+  link ? (
+    <Link to={link} component={Button} {...rest} />
+  ) : (
+    <Button {...rest} />
+  )
 
 const styles = StyleSheet.create({
   container: {
