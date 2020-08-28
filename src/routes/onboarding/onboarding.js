@@ -4,7 +4,7 @@ import Image from 'react-native-fit-image'
 import Slider from 'react-native-app-intro-slider';
 import Text from 'components/Text'
 import Button from 'components/Button'
-import { Size, white, fullScreen, bgSecondary, textSubSection } from 'styles';
+import { Size, white, flexOne, fullScreen, bgSecondary, textSubSection } from 'styles';
 import ForwardIcon from 'icons/forward'
 import img1 from 'images/onboarding/onboarding1.png'
 import img2 from 'images/onboarding/onboarding2.png'
@@ -55,7 +55,7 @@ export default () => {
   )
 
   return (
-    <View style={styles.container}>
+    <View style={[flexOne, fullScreen, bgSecondary]}>
       <Slider
         data={slides}
         renderItem={renderItem}
@@ -91,15 +91,6 @@ export default () => {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingLeft: Size(),
-    paddingRight: Size(),
-    paddingTop: Size(2),
-    paddingBottom: Size(),
-    ...fullScreen,
-    ...bgSecondary
-  },
   swiperDot: {
     backgroundColor:'#fff5',
     width: 8,

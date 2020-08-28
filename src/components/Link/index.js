@@ -6,7 +6,7 @@ export default ({ to, children, style }) => (
     link={to}
     title={typeof(children) === 'string' ? children : undefined}
     variant='nobg'
-    style={style}
+    style={[style, { padding: 0 }]}
   >
     {typeof(children) !== 'string' && children && children}
   </Button>

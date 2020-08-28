@@ -1,10 +1,25 @@
 import { Size, Colors } from './constants'
 
+export const basicPadding = {
+  paddingLeft: Size(),
+  paddingRight: Size(),
+  paddingTop: Size(2),
+  paddingBottom: Size()
+}
+
 export const fullScreen = {
   marginRight: -Size(),
   marginLeft: -Size(),
   marginTop: -Size(2),
-  marginBottom: -Size()
+  marginBottom: -Size(),
+  ...basicPadding
+}
+
+export const scrollPadding = {
+  marginLeft: -Size(),
+  marginRight: -Size(),
+  paddingLeft: Size(),
+  paddingRight: Size()
 }
 
 /* Font size */

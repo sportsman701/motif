@@ -5,7 +5,7 @@ import Button from 'components/Button'
 import Link from 'components/Link'
 import Image from 'react-native-fit-image';
 import xor from 'lodash/xor'
-import { flexOne, secondary, Size, Colors } from 'styles';
+import { flexOne, secondary, scrollPadding, Size, Colors } from 'styles';
 
 import img1 from 'images/explore-challenges/gsp.jpg'
 import img2 from 'images/explore-challenges/aaron-paul.jpg'
@@ -56,7 +56,7 @@ export default () => {
         </Link>
       </View>
       
-      <ScrollView style={styles.challengeScroll}>
+      <ScrollView style={[styles.challengeScroll, scrollPadding]}>
         <View style={styles.challengeView}>
           {challenges.map((column, key) => (
             <View key={key} style={[styles.widthOneThird, (key % 2 === 1) && styles.staggered]}>
