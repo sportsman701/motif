@@ -14,7 +14,6 @@ const Button = ({ style, title, block, variant, children, ...rest }) => (
   <TouchableOpacity
     style={[
       styles.container,
-      styles.buttonView,
       block && styles.block,
       variants[variant] || bgPrimary,
       style

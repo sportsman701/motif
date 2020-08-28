@@ -1,10 +1,17 @@
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
+import Button from 'components/Button'
 import Footer from 'icons/footer'
-import { Size } from 'styles';
+import AddIcon from 'icons/add'
+import { Size } from 'styles'
 
 export default ({ style }) => (
   <View style={[styles.container, style]}>
+    <View style={styles.addButtonView}>
+      <Button style={styles.addButton}>
+        <AddIcon />
+      </Button>
+    </View>
     <View style={styles.outline}>
       <View style={styles.wing} />
       <Footer />
@@ -21,30 +28,32 @@ export default ({ style }) => (
   </View>
 )
 
+const footerHeight = Size(1.5)
+
 const styles = StyleSheet.create({
   container: {
-    // shadowColor: "#000",
-    // shadowOffset: { width: 0, height: -12 },
-    // shadowRadius: 20,
-    // elevation: 5,
-    // marginTop: Size()
+  },
+  addButtonView: {
+    position: 'absolute',
+    bottom: footerHeight + 7,
+    width: '100%'
+  },
+  addButton: {
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    padding: 20
   },
   outline: {
-    flexDirection: 'row',
-  },
-  shadow: {
-    // shadowColor: "#000",
-    // shadowOffset: { width: 0, height: -12 },
-    // elevation: 5
+    flexDirection: 'row'
   },
   wing: {
     flex: 1,
     backgroundColor: 'white',
     borderTopColor: '#e7e7e7',
-    borderTopWidth: 1,
+    borderTopWidth: 1
   },
   height: {
-    height: Size(1.5),
+    height: footerHeight,
     top: -1,
     backgroundColor: 'white'
   },
