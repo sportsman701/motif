@@ -3,15 +3,13 @@ import { View, Text, StyleSheet } from 'react-native'
 import Button from 'components/Button'
 import Footer from 'icons/footer'
 import AddIcon from 'icons/add'
+import HomeIcon from 'icons/home'
+import SearchIcon from 'icons/search'
+import ChatIcon from 'icons/chat'
 import { Size } from 'styles'
 
 export default ({ style }) => (
-  <View style={[styles.container, style]}>
-    <View style={styles.addButtonView}>
-      <Button style={styles.addButton}>
-        <AddIcon />
-      </Button>
-    </View>
+  <View style={style}>
     <View style={styles.outline}>
       <View style={styles.wing} />
       <Footer />
@@ -19,11 +17,16 @@ export default ({ style }) => (
     </View>
     <View style={styles.height} />
     <View style={styles.content}>
-      <Text>a</Text>
-      <Text>a</Text>
+      <HomeIcon />
+      <SearchIcon />
       <View></View>
+      <ChatIcon />
       <Text>a</Text>
-      <Text>a</Text>
+    </View>
+    <View style={styles.addButtonView}>
+      <Button style={styles.addButton}>
+        <AddIcon />
+      </Button>
     </View>
   </View>
 )
@@ -31,12 +34,10 @@ export default ({ style }) => (
 const footerHeight = Size(1.5)
 
 const styles = StyleSheet.create({
-  container: {
-  },
   addButtonView: {
     position: 'absolute',
     bottom: footerHeight + 7,
-    width: '100%'
+    width: '100%',
   },
   addButton: {
     marginLeft: 'auto',
